@@ -171,7 +171,8 @@ This project is open source. Feel free to use, modify, and distribute it.
 
 ## 👤 Author
 
-**Aaditya** — [GitHub Profile](https://github.com/Aaditya-34)
+**Aaditya** — [GitHub Profile](https://github.com/Aaditya-34) 
+
 **Himanshu** - [GitHub Profile](https://github.com/Himanshu-kumar-20)
 
 ---
