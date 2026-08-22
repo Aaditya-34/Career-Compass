@@ -1,0 +1,1631 @@
+/* =============================================
+   CAREER COMPASS - Main Stylesheet
+   Project: Career Roadmap Generator
+   Web Designing Mini Project
+   ============================================= */
+
+/* ---------- 1. CSS Variables (Color Palette) ---------- */
+:root {
+    /* Main color palette */
+    --primary-dark: #0a0e27;       /* Deep dark blue background */
+    --primary-blue: #1a1f4e;       /* Dark blue for sections */
+    --accent-blue: #2563eb;        /* Bright blue for buttons */
+    --accent-purple: #7c3aed;      /* Purple accent color */
+    --accent-cyan: #06b6d4;        /* Cyan for highlights */
+    --accent-green: #10b981;       /* Green for success/learned */
+    --accent-red: #ef4444;         /* Red for missing skills */
+    --accent-yellow: #f59e0b;      /* Yellow for in-progress */
+    
+    /* Text colors */
+    --text-primary: #ffffff;       /* White text */
+    --text-secondary: #94a3b8;     /* Muted gray text */
+    --text-dark: #1e293b;          /* Dark text for light backgrounds */
+    
+    /* Background shades */
+    --bg-card: #111827;            /* Card background */
+    --bg-card-light: #1e2a3a;      /* Lighter card background */
+    --border-color: rgba(255,255,255,0.1);   /* Subtle border */
+    
+    /* Gradient combinations */
+    --gradient-main: linear-gradient(135deg, #0a0e27 0%, #1a1f4e 50%, #0f172a 100%);
+    --gradient-card: linear-gradient(135deg, #111827 0%, #1e2a3a 100%);
+    --gradient-accent: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    --gradient-cyan: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
+    
+    /* Spacing */
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    
+    /* Border radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-full: 50px;
+    
+    /* Shadows */
+    --shadow-glow-blue: 0 0 20px rgba(37, 99, 235, 0.3);
+    --shadow-glow-purple: 0 0 20px rgba(124, 58, 237, 0.3);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- 2. CSS Reset & Base Styles ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;       /* Smooth scrolling for anchor links */
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--gradient-main);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;            /* Prevent horizontal scroll */
+}
+
+/* Scrollbar styling for modern look */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--primary-dark);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--accent-purple);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue);
+}
+
+/* ---------- 3. Navigation Bar ---------- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;                 /* Stay above everything */
+    background: rgba(10, 14, 39, 0.95);
+    backdrop-filter: blur(10px);   /* Frosted glass effect */
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+/* Brand name / logo area */
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.nav-icon {
+    font-size: 1.8rem;
+    animation: spin-slow 8s linear infinite;  /* Slowly rotating compass */
+}
+
+/* Slow spin animation for compass icon */
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.nav-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    background: var(--gradient-cyan);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Navigation links list */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+/* Underline animation on hover */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-accent);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Hamburger menu (mobile) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* ---------- 4. Utility Classes ---------- */
+.hidden {
+    display: none !important;
+}
+
+/* Section header common style */
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.section-header p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* ---------- 5. Button Styles ---------- */
+/* Primary button with gradient */
+.btn-primary {
+    background: var(--gradient-accent);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: var(--radius-full);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-glow-blue);
+    letter-spacing: 0.5px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-large {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+}
+
+/* Secondary outline button */
+.btn-secondary {
+    background: transparent;
+    color: var(--accent-cyan);
+    border: 2px solid var(--accent-cyan);
+    padding: 0.8rem 2rem;
+    border-radius: var(--radius-full);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--accent-cyan);
+    color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* ---------- 6. Hero Section ---------- */
+.hero-section {
+    min-height: 100vh;
+    padding: 6rem 2rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Decorative background orb effect */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+/* Gradient highlighted text in title */
+.highlight {
+    background: var(--gradient-cyan);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+/* Stats row below hero button */
+.hero-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    background: var(--gradient-cyan);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* Hero visual floating cards */
+.hero-visual {
+    flex: 1;
+    max-width: 400px;
+    position: relative;
+    height: 400px;
+}
+
+/* Base style for all floating cards */
+.floating-card {
+    position: absolute;
+    background: var(--gradient-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+    cursor: default;
+    transition: transform 0.3s ease;
+}
+
+.floating-card span {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.floating-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+/* Position and animation for each floating card */
+.card-1 {
+    top: 20px;
+    left: 40px;
+    animation: float1 4s ease-in-out infinite;
+}
+
+.card-2 {
+    top: 20px;
+    right: 20px;
+    animation: float2 4s ease-in-out infinite 1s;
+}
+
+.card-3 {
+    bottom: 80px;
+    left: 20px;
+    animation: float3 4s ease-in-out infinite 2s;
+}
+
+.card-4 {
+    bottom: 60px;
+    right: 40px;
+    animation: float4 4s ease-in-out infinite 0.5s;
+}
+
+/* Floating animations using keyframes */
+@keyframes float1 {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+@keyframes float2 {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+@keyframes float3 {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+}
+@keyframes float4 {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ---------- 7. Features Section ---------- */
+.features-section {
+    padding: var(--spacing-xl) 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Grid for feature cards */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.feature-card {
+    background: var(--gradient-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glow effect on hover */
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-accent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-glow-purple);
+    border-color: rgba(124, 58, 237, 0.3);
+}
+
+.feature-card:hover::before {
+    transform: scaleX(1);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+    color: var(--text-primary);
+}
+
+.feature-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* ---------- 8. Assessment Form Section ---------- */
+.assessment-section {
+    padding: var(--spacing-xl) 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Main form container */
+.assessment-form {
+    background: var(--gradient-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-card);
+}
+
+/* Two-column row layout */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Individual form group */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;          /* Span full width in grid */
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Input and select field styles */
+.form-group input,
+.form-group select {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-group input::placeholder {
+    color: var(--text-secondary);
+}
+
+/* Dropdown option styling */
+.form-group select option {
+    background: var(--primary-blue);
+    color: var(--text-primary);
+}
+
+/* Focus glow effect on inputs */
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+    background: rgba(6, 182, 212, 0.05);
+}
+
+/* Error state for inputs */
+.form-group input.error,
+.form-group select.error {
+    border-color: var(--accent-red);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+/* Error message text */
+.error-msg {
+    font-size: 0.8rem;
+    color: var(--accent-red);
+    min-height: 1rem;
+}
+
+/* Checkbox grid layout */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+/* Each checkbox item styled as a card */
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.checkbox-item:hover {
+    background: rgba(37, 99, 235, 0.1);
+    border-color: var(--accent-blue);
+    color: var(--text-primary);
+}
+
+/* Style checkbox when checked */
+.checkbox-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent-cyan);
+    cursor: pointer;
+}
+
+/* Highlight checked items */
+.checkbox-item:has(input:checked) {
+    background: rgba(6, 182, 212, 0.1);
+    border-color: var(--accent-cyan);
+    color: var(--text-primary);
+}
+
+/* Form action buttons */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+/* ---------- 9. Results Section ---------- */
+.results-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ---------- 10. Dashboard / Career Cards ---------- */
+.dashboard-section {
+    padding: var(--spacing-xl) 0;
+}
+
+/* Student profile summary box */
+.profile-summary {
+    background: var(--gradient-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.profile-chip {
+    background: rgba(37, 99, 235, 0.15);
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    border-radius: var(--radius-full);
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+    color: var(--accent-cyan);
+}
+
+/* Grid for career recommendation cards */
+.career-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Individual career card */
+.career-card {
+    background: var(--gradient-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Top rank badge */
+.career-card.rank-1 {
+    border-color: rgba(245, 158, 11, 0.5);
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+}
+
+.career-card.rank-2 {
+    border-color: rgba(148, 163, 184, 0.5);
+}
+
+.career-card.rank-3 {
+    border-color: rgba(180, 100, 50, 0.5);
+}
+
+.career-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-glow-blue);
+}
+
+/* Rank badge in top corner */
+.rank-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.rank-badge.gold { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.rank-badge.silver { background: linear-gradient(135deg, #94a3b8, #64748b); }
+.rank-badge.bronze { background: linear-gradient(135deg, #b45309, #92400e); }
+
+.career-card-icon {
+    font-size: 3rem;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.career-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.career-card-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* Match percentage label */
+.match-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.match-label span:last-child {
+    color: var(--accent-cyan);
+    font-weight: 700;
+}
+
+/* Progress bar container */
+.progress-bar-container {
+    background: rgba(255,255,255,0.1);
+    border-radius: var(--radius-full);
+    height: 8px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+/* Animated progress bar fill */
+.progress-bar-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    background: var(--gradient-accent);
+    width: 0%;                     /* Starts at 0, animated by JS */
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reasoning explanation tags */
+.career-reasons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.reason-tag {
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    border-radius: var(--radius-full);
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+    color: var(--accent-cyan);
+}
+
+/* ---------- 11. Skill Gap Analyzer ---------- */
+.skill-gap-section {
+    padding: var(--spacing-xl) 0;
+}
+
+.skill-gap-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Individual skill column box */
+.skill-column {
+    background: var(--gradient-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+}
+
+.skill-column-header {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Header color variants */
+.skill-column-header.green { color: var(--accent-green); }
+.skill-column-header.red { color: var(--accent-red); }
+.skill-column-header.yellow { color: var(--accent-yellow); }
+.skill-column-header.blue { color: var(--accent-blue); }
+
+/* Each skill pill/badge */
+.skill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin: 0.3rem;
+}
+
+.skill-badge.learned {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: var(--accent-green);
+}
+
+.skill-badge.missing {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: var(--accent-red);
+}
+
+.skill-badge.critical {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    color: var(--accent-yellow);
+}
+
+.skill-badge.secondary {
+    background: rgba(37, 99, 235, 0.15);
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    color: #93c5fd;
+}
+
+/* ---------- 12. Career Readiness Score ---------- */
+.readiness-section {
+    padding: var(--spacing-xl) 0;
+}
+
+.readiness-container {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Circular progress wrapper */
+.circular-progress-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* SVG circle container */
+.circular-progress {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.progress-ring {
+    width: 200px;
+    height: 200px;
+    transform: rotate(-90deg);     /* Start from top */
+}
+
+/* Background track circle */
+.progress-ring-bg {
+    fill: none;
+    stroke: rgba(255,255,255,0.1);
+    stroke-width: 12;
+}
+
+/* Animated fill circle */
+.progress-ring-fill {
+    fill: none;
+    stroke: url(#progressGradient);
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-dasharray: 502;         /* Circumference of circle r=80 */
+    stroke-dashoffset: 502;        /* Start fully hidden */
+    transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Text overlay in center of circle */
+.progress-center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.readiness-percent {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    background: var(--gradient-cyan);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.readiness-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Message below the circle */
+.readiness-message {
+    text-align: center;
+    max-width: 200px;
+}
+
+.readiness-message p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Breakdown bars on the right */
+.readiness-breakdown {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.breakdown-item {
+    background: var(--gradient-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.5rem;
+}
+
+.breakdown-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.breakdown-label span:first-child {
+    color: var(--text-secondary);
+}
+
+.breakdown-label span:last-child {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* ---------- 14. Roadmap Timeline ---------- */
+.roadmap-section {
+    padding: var(--spacing-xl) 0;
+}
+
+/* Vertical timeline container */
+.roadmap-timeline {
+    position: relative;
+    padding-left: 40px;
+}
+
+/* Central vertical line */
+.roadmap-timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--gradient-accent);
+    border-radius: 2px;
+}
+
+/* Individual timeline item */
+.timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    background: var(--gradient-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 2rem;
+    transition: all 0.3s ease;
+    animation: fadeInLeft 0.6s ease forwards;
+    opacity: 0;
+}
+
+/* Stagger animation for timeline items */
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.2s; }
+.timeline-item:nth-child(3) { animation-delay: 0.3s; }
+.timeline-item:nth-child(4) { animation-delay: 0.4s; }
+.timeline-item:nth-child(5) { animation-delay: 0.5s; }
+.timeline-item:nth-child(6) { animation-delay: 0.6s; }
+.timeline-item:nth-child(7) { animation-delay: 0.7s; }
+.timeline-item:nth-child(8) { animation-delay: 0.8s; }
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* The dot on the timeline line */
+.timeline-dot {
+    position: absolute;
+    left: -31px;               /* Position on the vertical line */
+    top: 1.5rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--gradient-accent);
+    border: 3px solid var(--primary-dark);
+    box-shadow: var(--shadow-glow-blue);
+}
+
+.timeline-item:hover {
+    transform: translateX(5px);
+    border-color: rgba(37, 99, 235, 0.4);
+    box-shadow: var(--shadow-glow-blue);
+}
+
+/* Semester label badge */
+.timeline-semester {
+    display: inline-block;
+    background: var(--gradient-accent);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--radius-full);
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+/* For current semester - highlighted */
+.timeline-item.current-sem {
+    border-color: rgba(6, 182, 212, 0.5);
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), var(--bg-card-light));
+}
+
+.timeline-item.current-sem .timeline-dot {
+    background: var(--accent-cyan);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Pulsing animation for current semester dot */
+@keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 10px rgba(6, 182, 212, 0.5); }
+    50% { box-shadow: 0 0 25px rgba(6, 182, 212, 0.9); }
+}
+
+.timeline-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.timeline-tasks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.timeline-tasks li {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.timeline-tasks li::before {
+    content: '▸';
+    color: var(--accent-cyan);
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+/* ---------- 15. Project Suggestions ---------- */
+.projects-section {
+    padding: var(--spacing-xl) 0;
+}
+
+/* Tab buttons row */
+.projects-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    padding: 0.6rem 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    background: rgba(37, 99, 235, 0.1);
+    border-color: var(--accent-blue);
+    color: var(--text-primary);
+}
+
+/* Active tab style */
+.tab-btn.active {
+    background: var(--gradient-accent);
+    border-color: transparent;
+    color: white;
+    box-shadow: var(--shadow-glow-blue);
+}
+
+/* Project cards grid */
+.projects-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Individual project card */
+.project-card {
+    background: var(--gradient-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow-purple);
+    border-color: rgba(124, 58, 237, 0.3);
+}
+
+.project-card-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.project-card h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.project-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+/* Tech stack tags on project card */
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.tech-tag {
+    background: rgba(124, 58, 237, 0.1);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+    border-radius: var(--radius-full);
+    padding: 0.2rem 0.5rem;
+    font-size: 0.72rem;
+    color: #c4b5fd;
+}
+.tech-stack{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:15px;
+}
+
+.tech-badge{
+    padding:6px 12px;
+    border-radius:20px;
+    background:rgba(37,99,235,0.15);
+    border:1px solid rgba(37,99,235,0.3);
+    font-size:0.8rem;
+    color:#7dd3fc;
+}
+.tracker-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.tracker-card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid var(--border-color);
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+    transition:0.3s ease;
+}
+.tracker-icon{
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+.tracker-card h3{
+    font-size:2rem;
+    margin-bottom:10px;
+    color:var(--accent-cyan);
+}
+
+.tracker-card p{
+    color:var(--text-secondary);
+}
+/* ---------- 16. Progress Tracker ---------- */
+.progress-tracker-section {
+    padding: var(--spacing-xl) 0;
+}
+
+.progress-tracker-container {
+    background: var(--gradient-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+}
+
+/* Summary stats row */
+.tracker-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.tracker-stat {
+    text-align: center;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+}
+
+.tracker-stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.tracker-stat-number.green { color: var(--accent-green); }
+.tracker-stat-number.red { color: var(--accent-red); }
+.tracker-stat-number.cyan { color: var(--accent-cyan); }
+
+.tracker-stat-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* Overall progress bar */
+.tracker-overall {
+    margin-bottom: 2rem;
+}
+
+.tracker-overall-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.tracker-bar-bg {
+    background: rgba(255,255,255,0.1);
+    border-radius: var(--radius-full);
+    height: 12px;
+    overflow: hidden;
+}
+
+/* Dynamic animated fill for overall bar */
+.tracker-bar-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    background: var(--gradient-accent);
+    width: 0%;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shimmer animation on bar */
+.tracker-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    to { left: 100%; }
+}
+
+/* Per-skill tracker row */
+.skill-tracker-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.skill-tracker-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0;
+}
+
+.skill-tracker-name {
+    font-size: 0.88rem;
+    min-width: 150px;
+    color: var(--text-secondary);
+}
+
+.skill-tracker-bar-bg {
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    border-radius: var(--radius-full);
+    height: 6px;
+    overflow: hidden;
+}
+
+.skill-tracker-bar {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 1s ease;
+}
+
+.skill-tracker-bar.done { background: var(--accent-green); width: 100%; }
+.skill-tracker-bar.pending { background: var(--accent-red); width: 30%; }
+
+.skill-tracker-status {
+    font-size: 0.78rem;
+    min-width: 70px;
+    text-align: right;
+}
+
+.status-done { color: var(--accent-green); }
+.status-pending { color: var(--accent-red); }
+
+/* ---------- 17. Final Action Section ---------- */
+.action-section {
+    text-align: center;
+    padding: var(--spacing-xl) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.action-section h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.action-section p {
+    color: var(--text-secondary);
+}
+
+.action-section .btn-primary {
+    margin-right: 0.5rem;
+}
+
+/* ---------- 18. Footer ---------- */
+.footer {
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid var(--border-color);
+    padding: 2rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.footer-text {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.footer-note {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+/* ---------- 19. Toast Notification ---------- */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--gradient-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.5rem;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    z-index: 9999;
+    box-shadow: var(--shadow-card);
+    transform: translateX(200%);
+    transition: transform 0.4s ease;
+}
+
+/* Show state for toast */
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast.success {
+    border-left: 4px solid var(--accent-green);
+}
+
+.toast.error {
+    border-left: 4px solid var(--accent-red);
+}
+
+/* ---------- 20. Loading Animation ---------- */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ---------- 21. Responsive Design (Mobile) ---------- */
+@media (max-width: 768px) {
+    /* Hide nav links on mobile */
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(10, 14, 39, 0.98);
+        flex-direction: column;
+        padding: 1rem 2rem;
+        gap: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Show nav when hamburger is active */
+    .nav-links.open {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    /* Hero section stacks vertically */
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 7rem;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-visual {
+        width: 100%;
+        height: 250px;
+    }
+
+    .hero-stats {
+        justify-content: center;
+    }
+
+    /* Single column form on mobile */
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    /* Section header smaller on mobile */
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Readiness container stacks vertically */
+    .readiness-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Timeline adjustments */
+    .roadmap-timeline {
+        padding-left: 30px;
+    }
+
+    .timeline-dot {
+        left: -22px;
+    }
+
+    /* Single column career cards */
+    .career-cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Project tabs scroll horizontally */
+    .projects-tabs {
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.7rem;
+    }
+
+    .assessment-form {
+        padding: 1.5rem;
+    }
+
+    .checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ---------- 22. Print Styles ---------- */
+@media print {
+    /* Hide navbar and forms when printing */
+    .navbar, .hero-section, .features-section,
+    .assessment-section, .action-section, .footer {
+        display: none !important;
+    }
+
+    /* Reset background for print */
+    body {
+        background: white;
+        color: black;
+    }
+
+    .results-section {
+        display: block !important;
+    }
+
+    .section-header h2 {
+        color: #1a1f4e;
+        -webkit-text-fill-color: #1a1f4e;
+    }
+}
+
+/* ---------- 23. Scroll Reveal Animation ---------- */
+/* Used for sections that animate in on scroll */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic meta tags for proper rendering -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Compass - Personalized Career Roadmap Generator</title>
+    
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ========== NAVIGATION BAR ========== -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <!-- Compass icon using unicode -->
+            <span class="nav-icon">🧭</span>
+            <span class="nav-title">Career Compass</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#assessment" class="nav-link">Assessment</a></li>
+            <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+            <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
+        </ul>
+        <!-- Hamburger menu for mobile -->
+        <button class="hamburger" id="hamburgerBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ========== SECTION 1: HOME PAGE ========== -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <!-- Main heading with highlight -->
+            <h1 class="hero-title">
+                Find Your <span class="highlight">Career Path</span>
+            </h1>
+            <p class="hero-subtitle">
+                Career Compass helps students discover their ideal career, 
+                analyze skill gaps, and build a personalized roadmap to success.
+            </p>
+            <!-- Call to action button -->
+            <button class="btn-primary" id="startAssessmentBtn">
+                🚀 Start Career Assessment
+            </button>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">6+</span>
+                    <span class="stat-label">Career Paths</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Skills Mapped</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">Semester Plans</span>
+                </div>
+            </div>
+        </div>
+        <!-- Decorative floating cards on hero section -->
+        <div class="hero-visual">
+            <div class="floating-card card-1">
+                <span>💻</span>
+                <p>Web Dev</p>
+            </div>
+            <div class="floating-card card-2">
+                <span>🤖</span>
+                <p>AI Engineer</p>
+            </div>
+            <div class="floating-card card-3">
+                <span>📊</span>
+                <p>Data Science</p>
+            </div>
+            <div class="floating-card card-4">
+                <span>🎨</span>
+                <p>UI/UX Design</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FEATURES OVERVIEW SECTION ========== -->
+    <section class="features-section" id="features">
+        <div class="section-header">
+            <h2>What Career Compass Offers</h2>
+            <p>Everything you need to plan your tech career journey</p>
+        </div>
+        <div class="features-grid">
+            <!-- Feature Card 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Smart Recommendations</h3>
+                <p>Get top 3 career matches based on your interests and skills using weighted scoring.</p>
+            </div>
+            <!-- Feature Card 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Skill Gap Analysis</h3>
+                <p>Find out exactly which skills you are missing and which ones are critical to learn.</p>
+            </div>
+            <!-- Feature Card 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">🗺️</div>
+                <h3>Personalized Roadmap</h3>
+                <p>Semester-wise roadmap tailored to your current academic year and goals.</p>
+            </div>
+            
+            <!-- Feature Card 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>Readiness Score</h3>
+                <p>Know your career readiness percentage with an animated circular indicator.</p>
+            </div>
+            <!-- Feature Card 5 -->
+            <div class="feature-card">
+                <div class="feature-icon">💡</div>
+                <h3>Project Suggestions</h3>
+                <p>Get beginner to advanced project ideas for your chosen career path.</p>
+            </div>
+            <!-- Feature Card 6 -->
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Progress Tracker</h3>
+                <p>Visualize your skill acquisition progress with interactive charts.</p>
+        </div>
+    </section>
+
+    <!-- ========== SECTION 2: STUDENT ASSESSMENT FORM ========== -->
+    <section id="assessment" class="assessment-section">
+        <div class="section-header">
+            <h2>🎓 Student Assessment Form</h2>
+            <p>Tell us about yourself so we can build your personalized roadmap</p>
+        </div>
+
+        <form id="assessmentForm" class="assessment-form">
+            
+            <!-- Row 1: Personal Info -->
+            <div class="form-row">
+                <!-- Student Name -->
+                <div class="form-group">
+                    <label for="studentName">Full Name *</label>
+                    <input type="text" id="studentName" placeholder="Enter your full name" required>
+                    <span class="error-msg" id="nameError"></span>
+                </div>
+                <!-- Degree -->
+                <div class="form-group">
+                    <label for="degree">Degree *</label>
+                    <select id="degree" required>
+                        <option value="">-- Select Degree --</option>
+                        <option value="BTech">B.Tech</option>
+                        <option value="BE">B.E.</option>
+                        <option value="BCA">BCA</option>
+                        <option value="BSc">B.Sc (CS/IT)</option>
+                        <option value="MCA">MCA</option>
+                        <option value="MTech">M.Tech</option>
+                    </select>
+                    <span class="error-msg" id="degreeError"></span>
+                </div>
+            </div>
+
+            <!-- Row 2: Branch and Year -->
+            <div class="form-row">
+                <!-- Branch -->
+                <div class="form-group">
+                    <label for="branch">Branch *</label>
+                    <select id="branch" required>
+                        <option value="">-- Select Branch --</option>
+                        <option value="CSE">Computer Science (CSE)</option>
+                        <option value="IT">Information Technology (IT)</option>
+                        <option value="ECE">Electronics & Communication (ECE)</option>
+                        <option value="EEE">Electrical Engineering (EEE)</option>
+                        <option value="MECH">Mechanical Engineering</option>
+                        <option value="CIVIL">Civil Engineering</option>
+                        <option value="DS">Data Science</option>
+                        <option value="AI">Artificial Intelligence</option>
+                    </select>
+                    <span class="error-msg" id="branchError"></span>
+                </div>
+                <!-- Current Year -->
+                <div class="form-group">
+                    <label for="currentYear">Current Year *</label>
+                    <select id="currentYear" required>
+                        <option value="">-- Select Year --</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
+                    </select>
+                    <span class="error-msg" id="yearError"></span>
+                </div>
+            </div>
+
+            <!-- Row 3: Interests (Checkboxes) -->
+            <div class="form-group full-width">
+                <label>Interests * (Select all that apply)</label>
+                <div class="checkbox-grid" id="interestsGrid">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="coding"> 💻 Coding & Programming
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="design"> 🎨 UI/UX Design
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="data"> 📊 Data Analysis
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="ai_ml"> 🤖 AI & Machine Learning
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="web"> 🌐 Web Development
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="mobile"> 📱 Mobile Apps
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="cloud"> ☁️ Cloud Computing
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="cybersecurity"> 🔐 Cybersecurity
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="research"> 🔬 Research & Science
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="problem_solving"> 🧩 Problem Solving
+                    </label>
+                </div>
+                <span class="error-msg" id="interestsError"></span>
+            </div>
+
+            <!-- Row 4: Current Skills (Checkboxes) -->
+            <div class="form-group full-width">
+                <label>Current Skills * (Select what you already know)</label>
+                <div class="checkbox-grid" id="skillsGrid">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="skills" value="python"> 🐍 Python
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="skills" value="java"> ☕ Java
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="skills" value="javascript"> 🟨 JavaScript
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="skills" value="html_css"> 🌐 HTML/CSS
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="skills" value="sql"> 🗄️ SQL & Databases
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="skills" value="c_cpp"> ⚙️ C / C++
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="skills" value="react"> ⚛️ React / Angular
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="skills" value="ml_basics"> 🤖 ML Basics
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="skills" value="git"> 🗂️ Git & GitHub
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="skills" value="linux"> 🐧 Linux/Command Line
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="skills" value="figma"> 🎨 Figma / Design Tools
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="skills" value="statistics"> 📐 Statistics & Math
+                    </label>
+                </div>
+                <span class="error-msg" id="skillsError"></span>
+            </div>
+
+            <!-- Row 5: Preferred Career (Dropdown) -->
+            <div class="form-group full-width">
+                <label for="preferredCareer">Preferred Career Path *</label>
+                <select id="preferredCareer" required>
+                    <option value="">-- Select Your Dream Career --</option>
+                    <option value="Software Engineer">💻 Software Engineer</option>
+                    <option value="Data Scientist">📊 Data Scientist</option>
+                    <option value="Data Analyst">📈 Data Analyst</option>
+                    <option value="AI Engineer">🤖 AI Engineer</option>
+                    <option value="Web Developer">🌐 Web Developer</option>
+                    <option value="UI/UX Designer">🎨 UI/UX Designer</option>
+                </select>
+                <span class="error-msg" id="careerError"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-actions">
+                <button type="submit" class="btn-primary btn-large">
+                    🔍 Generate My Career Roadmap
+                </button>
+                <button type="reset" class="btn-secondary" id="resetFormBtn">
+                    🔄 Reset Form
+                </button>
+            </div>
+
+        </form>
+    </section>
+
+    <!-- ========== RESULTS SECTION (Hidden until form submission) ========== -->
+    <div id="resultsSection" class="results-section hidden">
+
+        <!-- ========== SECTION 3: CAREER RECOMMENDATION DASHBOARD ========== -->
+        <section id="dashboard" class="dashboard-section">
+            <div class="section-header">
+                <h2>🎯 Career Recommendation Dashboard</h2>
+                <p>Your top career matches based on your profile</p>
+            </div>
+
+            <!-- Student Profile Summary -->
+            <div class="profile-summary" id="profileSummary">
+                <!-- Filled dynamically by JavaScript -->
+            </div>
+
+            <!-- Top 3 Career Match Cards -->
+            <div class="career-cards-grid" id="careerCardsGrid">
+                <!-- Career cards generated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- ========== SECTION 4: SKILL GAP ANALYZER ========== -->
+        <section class="skill-gap-section">
+            <div class="section-header">
+                <h2>🔍 Skill Gap Analyzer</h2>
+                <p>See what skills you have and what you need to learn</p>
+            </div>
+            <div class="skill-gap-container" id="skillGapContainer">
+                <!-- Filled dynamically by JavaScript -->
+            </div>
+        </section>
+
+        <!-- ========== SECTION 5: CAREER READINESS SCORE ========== -->
+        <section class="readiness-section">
+            <div class="section-header">
+                <h2>📊 Career Readiness Score</h2>
+                <p>How ready are you for your dream career?</p>
+            </div>
+            <div class="readiness-container">
+                <!-- Circular progress indicator -->
+                <div class="circular-progress-wrapper">
+                    <div class="circular-progress" id="circularProgress">
+                        <svg class="progress-ring" viewBox="0 0 200 200">
+                            <!-- Background circle -->
+                            <circle class="progress-ring-bg" cx="100" cy="100" r="80"></circle>
+                            <!-- Animated foreground circle -->
+                            <circle class="progress-ring-fill" id="progressRingFill" cx="100" cy="100" r="80"></circle>
+                        </svg>
+                        <!-- Percentage text in center -->
+                        <div class="progress-center-text">
+                            <span class="readiness-percent" id="readinessPercent">0%</span>
+                            <span class="readiness-label">Ready</span>
+                        </div>
+                    </div>
+                    <div class="readiness-message" id="readinessMessage">
+                        <!-- Message shown below the circle -->
+                    </div>
+                </div>
+                <!-- Readiness breakdown bars -->
+                <div class="readiness-breakdown" id="readinessBreakdown">
+                    <!-- Filled by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== SECTION 7: PERSONALIZED ROADMAP ========== -->
+        <section id="roadmap" class="roadmap-section">
+            <div class="section-header">
+                <h2>🗺️ Your Personalized Roadmap</h2>
+                <p>Semester-wise plan customized for your year and career goal</p>
+            </div>
+            <!-- Timeline roadmap container -->
+            <div class="roadmap-timeline" id="roadmapTimeline">
+                <!-- Timeline items generated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- ========== SECTION 8: PROJECT SUGGESTIONS ========== -->
+        <section class="projects-section">
+            <div class="section-header">
+                <h2>💡 Semester-wise Project Suggestions</h2>
+                <p>Build these projects to strengthen your portfolio</p>
+            </div>
+            <div class="projects-tabs">
+                <!-- Tab buttons for project levels -->
+                <button class="tab-btn active" id="beginnerTab">🌱 Beginner</button>
+                <button class="tab-btn" id="intermediateTab">🚀 Intermediate</button>
+                <button class="tab-btn" id="advancedTab">⚡ Advanced</button>
+            </div>
+                <!-- Project lists shown per tab -->
+                <div id="projectsContainer" class="projects-container"></div>
+        </section>
+
+        <!-- ========== SECTION 9: PROGRESS TRACKER ========== -->
+        <section class="progress-tracker-section">
+            <div class="section-header">
+                <h2>📈 Progress Tracker</h2>
+                <p>Track your overall skill acquisition progress</p>
+            </div>
+            <div class="progress-tracker-container" id="progressTracker">
+</div>
+        </section>
+
+        <!-- Download / Share section -->
+        <div class="action-section">
+            <h3>Your roadmap is ready! 🎉</h3>
+            <p>Save or print this page to keep your roadmap handy.</p>
+            <button class="btn-primary" id="printRoadmapBtn">🖨️ Print Roadmap</button>
+            <button class="btn-secondary" id="newAssessmentBtn">🔄 New Assessment</button>
+        </div>
+
+    </div>
+    <!-- End Results Section -->
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span>🧭</span>
+                <span>Career Compass</span>
+            </div>
+            <p class="footer-text">
+                A Web Designing Mini Project | Built with HTML, CSS & JavaScript
+            </p>
+            <p class="footer-note">
+                Helping students navigate their tech career journey 🚀
+            </p>
+        </div>
+    </footer>
+
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
+
+</body>
+</html>
