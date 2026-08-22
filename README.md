@@ -177,6 +177,8 @@ This project is open source. Feel free to use, modify, and distribute it.
 
 **Vagish** - [GitHub Profile](https://github.com/Vagish23ps)
 
+**Roshni** -  [GitHub Profile](https://github.com/Roshni1830)
+
 ---
 
 <p align="center">
